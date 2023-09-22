@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ActorRepository {
+public class UsuarioRepository {
     @Autowired
     JdbcTemplate jdbc;
 
-    public List<Map<String, Object>> getActores() {
-        String sql = "Select * from actor";
+    public List<Map<String, Object>> getUsuarios() {
+        String sql = "Select * from usuario";
         return jdbc.queryForList(sql);
     }
 
-    public Map<String, Object> getActorById(String id) {
-        String sql = "Select * from actor where idActor = "+id;
+    public Map<String, Object> getUsuarioById(String id) {
+        String sql = "Select * from usuario where idUsuario = "+id;
         return jdbc.queryForMap(sql);
     }
 }
