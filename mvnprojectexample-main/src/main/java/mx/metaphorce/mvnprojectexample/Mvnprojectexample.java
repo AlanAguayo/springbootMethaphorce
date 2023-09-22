@@ -1,17 +1,10 @@
 package mx.metaphorce.mvnprojectexample;
 
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 import com.google.gson.Gson;
 
-import mx.metaphorce.mvnprojectexample.model.ClaseEntityEjemplo;
-import mx.metaphorce.mvnprojectexample.model.Peliculas;
-import mx.metaphorce.mvnprojectexample.model.PersonaCliente;
-import mx.metaphorce.mvnprojectexample.model.PersonaMultiPerfil;
 import mx.metaphorce.mvnprojectexample.repository.ActoresPeliculaRepository;
-import mx.metaphorce.mvnprojectexample.repository.PersonaRepository;
 
 public class Mvnprojectexample {
 
