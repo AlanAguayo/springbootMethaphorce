@@ -7,37 +7,34 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.tecnm.shopall.model.Carrito;
-import mx.tecnm.shopall.repository.CarritoRepository;
+import mx.tecnm.shopall.model.TipoPago;
+import mx.tecnm.shopall.repository.TipoPagoRepository;
 
 @Service
 public class TipoPagoService {
     @Autowired
-    CarritoRepository repo;
+    TipoPagoRepository repo;
 
-    public List<Carrito> getAll(){
-        List<Carrito> actores = new ArrayList<>();
-        for(Carrito carrito : repo.findAll()){
-            actores.add(carrito);
+    public List<TipoPago> getAll(){
+        List<TipoPago> tipoPagos = new ArrayList<>();
+        for(TipoPago tipoPago : repo.findAll()){
+            tipoPagos.add(tipoPago);
         }
-        return actores;
+        return tipoPagos;
     }
 
-    public Optional<Carrito> getCarrito(int id){
+    public Optional<TipoPago> getOne(int id){
         return repo.findById(id);
     }
 
-    public void add(Carrito actor){
-        repo.save(actor);
+    public void add(TipoPago tipoPago){
+        repo.save(tipoPago);
     }
 
-    public void update(int id,Carrito carrito){
-        Optional<Carrito> result = repo.findById(id);
-
+    public void update(TipoPago tipoPago){
+        Optional<TipoPago> result = repo.findById(tipoPago.getId());
         if (result.isPresent()) {
-            Carrito carritoAux = result.get();
-            carritoAux.setId(carrito.getId());
-            repo.save(carritoAux);
+            repo.save(tipoPago);
         }
     }
 

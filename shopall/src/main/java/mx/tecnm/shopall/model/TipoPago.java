@@ -22,7 +22,7 @@ import lombok.ToString;
 @ToString
 @Data
 @Entity
-@Table(name = "tipoPago")
+@Table(name = "tipo_pago")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 
 public class TipoPago implements Serializable{

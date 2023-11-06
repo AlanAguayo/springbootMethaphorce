@@ -7,40 +7,42 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.tecnm.shopall.model.Carrito;
-import mx.tecnm.shopall.repository.CarritoRepository;
+import mx.tecnm.shopall.model.Comprador;
+import mx.tecnm.shopall.model.Transaccion;
+import mx.tecnm.shopall.repository.TransaccionRepository;
 
 @Service
 public class TransaccionService {
     @Autowired
-    CarritoRepository repo;
+    TransaccionRepository repo;
 
-    public List<Carrito> getAll(){
-        List<Carrito> actores = new ArrayList<>();
-        for(Carrito carrito : repo.findAll()){
-            actores.add(carrito);
+    public List<Transaccion> getAll(){
+        List<Transaccion> transacciones = new ArrayList<>();
+        for(Transaccion transaccion : repo.findAll()){
+            transacciones.add(transaccion);
         }
-        return actores;
+        return transacciones;
     }
 
-    public Optional<Carrito> getCarrito(int id){
+    public Optional<Transaccion> getOne(int id){
         return repo.findById(id);
     }
 
-    public void add(Carrito actor){
-        repo.save(actor);
+    public List<Transaccion> getByComprador(Optional<Comprador> comprador) {
+        return repo.findByComprador(comprador);
     }
 
-    public void update(int id,Carrito carrito){
-        Optional<Carrito> result = repo.findById(id);
+    public void add(Transaccion transaccion){
+        repo.save(transaccion);
+    }
 
+    public void update(Transaccion transaccion){
+        Optional<Transaccion> result = repo.findById(transaccion.getId());
         if (result.isPresent()) {
-            Carrito carritoAux = result.get();
-            carritoAux.setId(carrito.getId());
-            repo.save(carritoAux);
+            repo.save(transaccion);
         }
     }
-
+ 
     public void delete(int id){
         repo.deleteById(id);
     }

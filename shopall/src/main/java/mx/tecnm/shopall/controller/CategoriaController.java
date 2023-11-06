@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -28,19 +27,18 @@ public class CategoriaController {
     @PostMapping("")
     public String add(@RequestBody Categoria body){
         ser.add(body);
-        return "Actor agregado";
+        return "Categoria agregada";
     }
 
-    @PutMapping("/{id}")
-    public String update(@PathVariable int id, @RequestBody Categoria body) {
-        ser.update(id,body);
-        return "Actor editado";
+    @PutMapping("")
+    public String update(@RequestBody Categoria body) {
+        ser.update(body);
+        return "Categoria editada";
     }
 
-    @DeleteMapping("")
-    public String delete(@RequestBody Map<String, Integer> requestBody) {
-        Integer id = requestBody.get("id");
-        ser.delete(id);
-        return "Actor eliminado";
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id) {
+            ser.delete(id);
+            return "Categoria eliminada";
     }
 }

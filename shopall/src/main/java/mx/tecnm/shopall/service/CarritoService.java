@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.tecnm.shopall.model.Carrito;
+import mx.tecnm.shopall.model.Comprador;
 import mx.tecnm.shopall.repository.CarritoRepository;
 
 @Service
@@ -16,31 +17,36 @@ public class CarritoService {
     CarritoRepository repo;
 
     public List<Carrito> getAll(){
-        List<Carrito> actores = new ArrayList<>();
+        List<Carrito> carritos = new ArrayList<>();
         for(Carrito carrito : repo.findAll()){
-            actores.add(carrito);
+            carritos.add(carrito);
         }
-        return actores;
+        return carritos;
     }
 
-    public Optional<Carrito> getCarrito(int id){
+    public Optional<Carrito> getOne(int id){
         return repo.findById(id);
     }
 
-    public void add(Carrito actor){
-        repo.save(actor);
+    public List<Carrito> getCarritosByComprador(Optional<Comprador> idComprador) {
+        return repo.findByComprador(idComprador);
     }
 
-    public void update(int id,Carrito carrito){
-        Optional<Carrito> result = repo.findById(id);
+    public Carrito getLatestCarritoByCompradorId(int idComprador) {
+        return repo.findLatestCarritoByComprador(idComprador);
+    } 
 
+    public void add(Carrito carrito){
+        repo.save(carrito);
+    }
+
+    public void update(Carrito usuario){
+        Optional<Carrito> result = repo.findById(usuario.getId());
         if (result.isPresent()) {
-            Carrito carritoAux = result.get();
-            carritoAux.setId(carrito.getId());
-            repo.save(carritoAux);
+            repo.save(usuario);
         }
     }
-
+ 
     public void delete(int id){
         repo.deleteById(id);
     }

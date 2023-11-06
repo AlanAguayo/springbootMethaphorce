@@ -7,37 +7,34 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.tecnm.shopall.model.Carrito;
-import mx.tecnm.shopall.repository.CarritoRepository;
+import mx.tecnm.shopall.model.Comprador;
+import mx.tecnm.shopall.repository.CompradorRepository;
 
 @Service
 public class CompradorService {
     @Autowired
-    CarritoRepository repo;
+    CompradorRepository repo;
 
-    public List<Carrito> getAll(){
-        List<Carrito> actores = new ArrayList<>();
-        for(Carrito carrito : repo.findAll()){
-            actores.add(carrito);
+    public List<Comprador> getAll(){
+        List<Comprador> compradores = new ArrayList<>();
+        for(Comprador comprador : repo.findAll()){
+            compradores.add(comprador);
         }
-        return actores;
+        return compradores;
     }
 
-    public Optional<Carrito> getCarrito(int id){
+    public Optional<Comprador> getOne(int id){
         return repo.findById(id);
     }
 
-    public void add(Carrito actor){
-        repo.save(actor);
+    public void add(Comprador comprador){
+        repo.save(comprador);
     }
 
-    public void update(int id,Carrito carrito){
-        Optional<Carrito> result = repo.findById(id);
-
+    public void update(Comprador comprador){
+        Optional<Comprador> result = repo.findById(comprador.getId());
         if (result.isPresent()) {
-            Carrito carritoAux = result.get();
-            carritoAux.setId(carrito.getId());
-            repo.save(carritoAux);
+            repo.save(comprador);
         }
     }
 

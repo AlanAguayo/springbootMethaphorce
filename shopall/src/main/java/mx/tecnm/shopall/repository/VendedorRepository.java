@@ -7,5 +7,5 @@ import mx.tecnm.shopall.model.Vendedor;
 
 @Repository
 public interface VendedorRepository extends CrudRepository<Vendedor, Integer>{
-    
+
 }

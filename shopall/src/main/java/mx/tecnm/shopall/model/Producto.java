@@ -1,7 +1,10 @@
 package mx.tecnm.shopall.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import jakarta.persistence.Column;
@@ -9,6 +12,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -49,6 +54,11 @@ public class Producto implements Serializable{
     private Vendedor vendedor;
     
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_categoria")
     private Categoria categoria;
+
+    @ManyToMany
+    @JoinTable(name = "carrito_producto", joinColumns = @JoinColumn(name = "id_producto"), inverseJoinColumns = @JoinColumn(name="id_carrito"))
+    @JsonIgnore
+    private List<Producto> productos = new ArrayList<>();
 }

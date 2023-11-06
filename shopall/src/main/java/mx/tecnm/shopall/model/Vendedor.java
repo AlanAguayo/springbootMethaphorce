@@ -8,8 +8,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -24,15 +24,15 @@ import lombok.ToString;
 @ToString
 @Data
 @Entity
-@Table(name = "comprador")
+@Table(name = "vendedor")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 
-public class Vendedor implements Serializable{
+public class Vendedor implements Serializable {
     @Id
-    @Column(name = "id_vendedor")
+    @Column(name="id_vendedor")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Usuario usuario ;
 }

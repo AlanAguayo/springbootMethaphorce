@@ -9,20 +9,17 @@ import mx.tecnm.shopall.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.tecnm.shopall.model.Carrito;
-import mx.tecnm.shopall.repository.CarritoRepository;
-
 @Service
 public class CategoriaService {
     @Autowired
     CategoriaRepository repo;
 
     public List<Categoria> getAll(){
-        List<Categoria> actores = new ArrayList<>();
+        List<Categoria> categorias = new ArrayList<>();
         for(Categoria categoria : repo.findAll()){
-            actores.add(categoria);
+            categorias.add(categoria);
         }
-        return actores;
+        return categorias;
     }
 
     public Optional<Categoria> getOne(int id){
@@ -33,13 +30,10 @@ public class CategoriaService {
         repo.save(categoria);
     }
 
-    public void update(int id,Categoria categoria){
-        Optional<Categoria> result = repo.findById(id);
-
+    public void update(Categoria categoria){
+        Optional<Categoria> result = repo.findById(categoria.getId());
         if (result.isPresent()) {
-            Categoria categoriaAux = result.get();
-            categoriaAux.setId(categoria.getId());
-            repo.save(categoriaAux);
+            repo.save(categoria);
         }
     }
 
